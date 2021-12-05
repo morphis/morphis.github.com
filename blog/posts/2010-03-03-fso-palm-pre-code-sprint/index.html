@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de-de">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="linux, anbox, software-development" name="keywords">
+<meta content="Simon Fels" name="author">
+<meta property="og:title" content="FSO Palm Pre Code-Sprint - Personal notes">
+<meta property="og:url" content="https://mm.gravedo.de/blog/posts/2010-03-03-fso-palm-pre-code-sprint/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>FSO Palm Pre Code-Sprint | Personal notes</title>
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/style.css">
+<link rel="shortcut icon" href="https://mm.gravedo.de/blog/wave.ico">
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/fontawesome-all.css">
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://mm.gravedo.de/blog"><h1 class="title is-4">Personal notes</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/morphis" target="_blank">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://linkedin.com/in/simon-fels" target="_blank">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">FSO Palm Pre Code-Sprint</h1>
+    <h2 class="subtitle is-5">March 3, 2010 by Simon Fels</h2>
+    
+    <div class="content">
+      <p>Tomorrow I will meet with <a href="http://www.vanille-media.de">Mickey</a> to work with him on FSO support for
+the Palm Pre. In the last month I worked mostly on the implementation of
+the protocol between userland and modem in the Palm Pre and we are now
+able to react on incomming calls and only one step away from doing our
+own calls.</p>
+<p>Most part of our work tomorrow will be the integration of <a href="http://git.freesmartphone.org/?p=msmcomm.git;a=summary">libmsmcomm</a>
+into FSO. We need to rework some of the basic interfaces in fsogsmd to
+be able to run the AT interpreter beside the libmsmcomm stuff. So we
+should be able for the first time to do most stuff which is actually
+not implemented in libmsmcomm with normal AT commands only with the
+loss of creating data connections over GPRS/EDGE/UMTS. But I hope we
+can replace nearly all of the important AT commands in the near future
+with their equivalent in libmsmcomm.</p>
+<p>So stay tuned! FSO will be on our Palm Pre, very soon!</p>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2020 Simon Fels | Made with <a href="https://github.com/mojoaar/hucore.git" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥ | <a href="https://mm.gravedo.de/blog/dsgvo/index.html">Data policy</a> | <a href="https://mm.gravedo.de/blog/impressum/index.html">Imprint</a></p>
+  </div>
+</section>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-133715-1', 'auto');
+  ga('send', 'pageview');
+  ga('set', 'anonymizeIp', true);
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>

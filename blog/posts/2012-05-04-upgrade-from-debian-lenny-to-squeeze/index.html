@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de-de">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="linux, anbox, software-development" name="keywords">
+<meta content="Simon Fels" name="author">
+<meta property="og:title" content="Upgrade from Debian Lenny to Squeeze - Personal notes">
+<meta property="og:url" content="https://mm.gravedo.de/blog/posts/2012-05-04-upgrade-from-debian-lenny-to-squeeze/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>Upgrade from Debian Lenny to Squeeze | Personal notes</title>
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/style.css">
+<link rel="shortcut icon" href="https://mm.gravedo.de/blog/wave.ico">
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/fontawesome-all.css">
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://mm.gravedo.de/blog"><h1 class="title is-4">Personal notes</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/morphis" target="_blank">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://linkedin.com/in/simon-fels" target="_blank">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Upgrade from Debian Lenny to Squeeze</h1>
+    <h2 class="subtitle is-5">May 4, 2012 by Simon Fels</h2>
+    
+    <div class="content">
+      <p>Today I upgrade my server finally from Debian lenny to squeeze (which was
+released already last year, but I never had the time to do the upgrade
+since today). All in all the upgrade process went very fine. Following the
+release upgrade notes helped a lot and saved me some time (see <a href="http://www.debian.org/releases/stable/amd64/release-notes/ch-upgrading.html">0</a>).</p>
+<p>Finally I migrated to a dependency based boot system too. I already started
+with this last year but stopped it a second time cause of missing time for
+it. I purged today all packages I never purged which leave their stuff in
+the init system after removal and the upgrade process succeeded finally.</p>
+<p>Congratulations to all Debian people out here. You do a great job everyday!
+Thank you very much, you saved me a lot time with focussing on quality and
+stability.</p>
+<p>As next step I will migrate the whole lighttpd migration back to apache2 as
+I never felt very comfortable with lighttpd due to a lot of small things I
+will not list here but maybe another time. Let's see how much time
+there will be in the next weeks for it 🙂</p>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2020 Simon Fels | Made with <a href="https://github.com/mojoaar/hucore.git" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥ | <a href="https://mm.gravedo.de/blog/dsgvo/index.html">Data policy</a> | <a href="https://mm.gravedo.de/blog/impressum/index.html">Imprint</a></p>
+  </div>
+</section>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-133715-1', 'auto');
+  ga('send', 'pageview');
+  ga('set', 'anonymizeIp', true);
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>

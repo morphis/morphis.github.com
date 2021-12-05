@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de-de">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="linux, anbox, software-development" name="keywords">
+<meta content="Simon Fels" name="author">
+<meta property="og:title" content="Taking the Anbox journey to the next level - Personal notes">
+<meta property="og:url" content="https://mm.gravedo.de/blog/posts/2020-01-21-taking-the-anbox-journey-to-the-next-level/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>Taking the Anbox journey to the next level | Personal notes</title>
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/style.css">
+<link rel="shortcut icon" href="https://mm.gravedo.de/blog/wave.ico">
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/fontawesome-all.css">
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://mm.gravedo.de/blog"><h1 class="title is-4">Personal notes</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/morphis" target="_blank">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://linkedin.com/in/simon-fels" target="_blank">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Taking the Anbox journey to the next level</h1>
+    <h2 class="subtitle is-5">January 21, 2020 by Simon Fels</h2>
+    
+    <div class="content">
+      <p>Today, Canonical released <a href="https://anbox-cloud.io">Anbox Cloud</a> which builds upon the same
+ideas as I built Anbox on in 2017. I am thankful that Canonical allowed me to take the
+idea of Anbox to the next level, form an engineering team around it and bring it as a fully
+supported product to any cloud (private or public, thanks to the magic of Juju)
+for a wide variety of use cases. It covers more advanced use cases like cloud
+gaming or application streaming for enterprises down to providing an on-premise
+Android cluster for development and testing of Android applications. You can read
+more about Anbox Cloud <a href="https://ubuntu.com/blog/canonical-introduces-anbox-cloud-scalable-android-in-the-cloud">here</a>,
+<a href="https://anbox-cloud.io">here</a> and <a href="https://ubuntu.com/blog/implementing-an-android-based-cloud-game-streaming-service-with-anbox-cloud">here</a>.</p>
+<p>Despite the nature of Anbox, Anbox Cloud is not open source and a commercial product.
+It is based on the same underlying ideas of Anbox but is a completely separate code
+base. However that doesn't mean my team at Canonical isn't contributing back to the
+original Anbox. We have worked for example very hard (especially
+<a href="https://brauner.github.io/2019/01/09/android-binderfs.html">Christian Brauner</a>)
+to bring <a href="https://www.kernel.org/doc/html/latest/admin-guide/binderfs.html">binderfs</a>
+to the upstream Linux kernel. It is now enabled in all new Ubuntu
+kernels (&gt;= 19.04) by default and can be loaded at runtime if needed
+(<code>$ sudo modprobe binder_linux</code>). Anbox itself supports binderfs since this PR.
+This will allow Anbox to work out of the box on any Linux system without the need
+to load custom kernel modules which are not part of your distribution kernel. I expect
+binderfs to come to more distributions by default in the near future. From
+<a href="https://android-review.googlesource.com/q/binderfs">recent changes</a> to the Android
+Open Source Project (AOSP) it looks like Google will make use
+of binderfs in upstream Android starting with Android 11 too :-)</p>
+<p>Anbox itself will remain <strong>as is</strong>, licensed under the terms of the GPL-3 and a community
+project centered around the Linux desktop, aiming to provide an Android application
+layer (like WINE) on any Linux system.</p>
+<p>Thanks to everyone who contributed to Anbox so far in one way or the other and those who
+will in the future!</p>
+<p>We have an exciting future ahead of us!</p>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2020 Simon Fels | Made with <a href="https://github.com/mojoaar/hucore.git" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥ | <a href="https://mm.gravedo.de/blog/dsgvo/index.html">Data policy</a> | <a href="https://mm.gravedo.de/blog/impressum/index.html">Imprint</a></p>
+  </div>
+</section>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-133715-1', 'auto');
+  ga('send', 'pageview');
+  ga('set', 'anonymizeIp', true);
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>

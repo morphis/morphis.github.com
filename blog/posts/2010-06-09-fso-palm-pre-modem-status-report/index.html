@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de-de">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="linux, anbox, software-development" name="keywords">
+<meta content="Simon Fels" name="author">
+<meta property="og:title" content="FSO Palm Pre Modem Status Report - Personal notes">
+<meta property="og:url" content="https://mm.gravedo.de/blog/posts/2010-06-09-fso-palm-pre-modem-status-report/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>FSO Palm Pre Modem Status Report | Personal notes</title>
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/style.css">
+<link rel="shortcut icon" href="https://mm.gravedo.de/blog/wave.ico">
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/fontawesome-all.css">
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://mm.gravedo.de/blog"><h1 class="title is-4">Personal notes</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/morphis" target="_blank">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://linkedin.com/in/simon-fels" target="_blank">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">FSO Palm Pre Modem Status Report</h1>
+    <h2 class="subtitle is-5">June 9, 2010 by Simon Fels</h2>
+    
+    <div class="content">
+      <p>Through my last three weeks on holiday I got a lot things implemented in msmcomm.
+We now have the following working:</p>
+<ul>
+<li>call support: dial, answer and end calls (only call forwarding and call conference stuff is missing)</li>
+<li>various network information: network-list, rssi, current nework, network time, mode preference (GSM/UMTS/auto)</li>
+<li>various system related things: set system time, modem audio tuning parameters, audio profiles,  charging</li>
+<li>SIM: read/write/delete phonebooks, verify pin, enable/disable pin, change pin,  sim info (imsi, misdn), phonebook properties</li>
+</ul>
+<p>This is already a lot we can work with. For all messages we have simple
+error handling like checking the received message for an error code etc.
+Only on some response messages we don't have the right offset for the error
+return code yet. But finding it is just a matter of time 🙂</p>
+<p>The next step will be SMS support. I already started with this and can
+receive an incoming SMS. Luckily the msmcomm protocol is using the same
+PDU format for reporting SMS as it is defined in TS 23.040. This makes
+it easy for us to implement it beside our already existing SMS
+implementation in fsogsmd.</p>
+<p>Next step will be sending SMS messages. I already dumped the messages
+webOS is sending and receiving for this. I just have to look deeper
+into them and implement all important messages, responses and events
+in <!-- raw HTML omitted -->libmsmcomm<!-- raw HTML omitted -->.</p>
+<p>If you want to try everything to can do the following:</p>
+<p><strong>WARNING:</strong> <em>Before you do any of the steps below, do a full backup
+of all our data on the device! The Freesmartphone team provides this
+as is without warranty of any kind, either expressed or implied,
+including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.
+The entire risk as to the quality and performance of this program
+is with you. Should this program prove defective, you assume the
+cost of all necessary servicing, repair or correction. In no
+event will the Freesmartphone team or any other party be
+liable to you for damages, including any general, special,
+incidental or consequential damages arising out of the use
+or inability to use this program (including but not limited
+to loss of data or data being rendered inaccurate or losses
+sustained by you or third parties or a failure of this program
+to operate with any other programs)</em></p>
+<ol>
+<li>
+<p>Compile the serial_forward utility (<a href="http://git.freesmartphone.org/?p=cornucopia.git;a=tree;f=tools/serial_forward">http://git.freesmartphone.org/?p=cornucopia.git;a=tree;f=tools/serial_forward</a>)
+for the Palm Pre (use OpenEmbedded or you favourite toolchain) and copy it onto
+the device.</p>
+</li>
+<li>
+<p>Ensure that you have USB networking enabled on your Pre</p>
+</li>
+<li>
+<p>Connect to your Pre with novaterm</p>
+</li>
+<li>
+<p>Stop the TelephonyInterfaceLayer:</p>
+</li>
+</ol>
+<pre><code>$ stop TelephonyInterfaceLayer
+</code></pre><ol start="5">
+<li>Reset the modem</li>
+</ol>
+<pre><code>$ pmmodempower cycle
+</code></pre><ol start="6">
+<li>Run serial_forward with:</li>
+</ol>
+<pre><code>$ ./serial\_forward -n /dev/modemuart -p 3001 -t hsuart
+</code></pre><ol start="7">
+<li>On your local PC configure the usbnet interface:</li>
+</ol>
+<pre><code>$ ifconfig usb0 192.168.0.1
+</code></pre><ol start="8">
+<li>
+<p>Install msmcommd on your local PC</p>
+</li>
+<li>
+<p>Edit /etc/msmcomm.conf to look like this:</p>
+</li>
+</ol>
+<pre><code>source_type network
+source_path 192.168.0.202:3001
+log_target stderr
+</code></pre><ol start="10">
+<li>Start msmcommd:</li>
+</ol>
+<pre><code>$ ./msmcommd
+</code></pre><ol start="11">
+<li>
+<p>You will see msmcommd doing the initial low level setup</p>
+</li>
+<li>
+<p>Compile msmvterm and launch it:</p>
+</li>
+</ol>
+<pre><code>$ ./msmvterm
+</code></pre><ol start="13">
+<li>Type &lsquo;help&rsquo; within msmvterm to see all available commands</li>
+</ol>
+<p><strong>NOTE:</strong> Only after you have done <code>change_operation_mode reset</code> and <code>test_alive</code> the modem can received other commands!</p>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2020 Simon Fels | Made with <a href="https://github.com/mojoaar/hucore.git" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥ | <a href="https://mm.gravedo.de/blog/dsgvo/index.html">Data policy</a> | <a href="https://mm.gravedo.de/blog/impressum/index.html">Imprint</a></p>
+  </div>
+</section>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-133715-1', 'auto');
+  ga('send', 'pageview');
+  ga('set', 'anonymizeIp', true);
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>

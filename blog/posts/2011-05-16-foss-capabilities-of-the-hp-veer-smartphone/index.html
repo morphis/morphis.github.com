@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de-de">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="linux, anbox, software-development" name="keywords">
+<meta content="Simon Fels" name="author">
+<meta property="og:title" content="FOSS capabilities of the HP Veer smartphone - Personal notes">
+<meta property="og:url" content="https://mm.gravedo.de/blog/posts/2011-05-16-foss-capabilities-of-the-hp-veer-smartphone/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>FOSS capabilities of the HP Veer smartphone | Personal notes</title>
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/style.css">
+<link rel="shortcut icon" href="https://mm.gravedo.de/blog/wave.ico">
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/fontawesome-all.css">
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://mm.gravedo.de/blog"><h1 class="title is-4">Personal notes</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/morphis" target="_blank">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://linkedin.com/in/simon-fels" target="_blank">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">FOSS capabilities of the HP Veer smartphone</h1>
+    <h2 class="subtitle is-5">May 16, 2011 by Simon Fels</h2>
+    
+    <div class="content">
+      <p>Yesterday HP released their new smartphone the HP Veer in the US
+to the market. At the same they released their webOS doctor for
+the new phone which is the ulitity you use when your device
+gets broken some way. It contains the whole rootfs and kernel
+files for the device so I was able to do some first research
+about the FOSS capabilities of the new device. Here are my first
+notes about the device and the software it's using:</p>
+<ul>
+<li>Linux Kernel 2.6.29</li>
+<li>Wireless chip is a bcm4319; kernel driver is found
+/lib/modules/2.6.29-palm-shank/kernel/net/wifi/dhd.ko; I didn't found a linux driver for the bcm4319 out there after a short search</li>
+<li>Modem protocol is mostly the same as we found in the Palm Pre devices</li>
+<li>The only thing about the modem that has changed is the lowlevel character
+of the protocol. The HCI protocol as found in Palm Pre devices isn't used
+anymore. Instead they are now using a shared memory buffer for the
+communication between the baseband the application processor. One keyword
+here is <em>oncrpc</em>.</li>
+<li>Touchscreen is a ﻿﻿cy8ctma300e from Cypress</li>
+<li>most utilities like PmTilTest, PmModemInfo are still there</li>
+</ul>
+<p>So far some already interesting points. Let's see when I get one of these
+devices in my hands do some more detail research.</p>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2020 Simon Fels | Made with <a href="https://github.com/mojoaar/hucore.git" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥ | <a href="https://mm.gravedo.de/blog/dsgvo/index.html">Data policy</a> | <a href="https://mm.gravedo.de/blog/impressum/index.html">Imprint</a></p>
+  </div>
+</section>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-133715-1', 'auto');
+  ga('send', 'pageview');
+  ga('set', 'anonymizeIp', true);
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>

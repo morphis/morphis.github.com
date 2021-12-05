@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de-de">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="linux, anbox, software-development" name="keywords">
+<meta content="Simon Fels" name="author">
+<meta property="og:title" content="FSO on the Palm Pre – Short Status Update - Personal notes">
+<meta property="og:url" content="https://mm.gravedo.de/blog/posts/2010-04-23-fso-on-the-palm-pre-short-status-update/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>FSO on the Palm Pre – Short Status Update | Personal notes</title>
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/style.css">
+<link rel="shortcut icon" href="https://mm.gravedo.de/blog/wave.ico">
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/fontawesome-all.css">
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://mm.gravedo.de/blog"><h1 class="title is-4">Personal notes</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/morphis" target="_blank">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://linkedin.com/in/simon-fels" target="_blank">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">FSO on the Palm Pre – Short Status Update</h1>
+    <h2 class="subtitle is-5">April 23, 2010 by Simon Fels</h2>
+    
+    <div class="content">
+      <p>For a long time we're now hacking on the Palm Pre device to get FSO
+working: Time for a short summary were we are and what has do be done
+in the near future (mickey <a href="http://lists.linuxtogo.org/pipermail/smartphones-userland/2010-April/002539.html">already pointed out</a> which components are
+working and which not).</p>
+<p><strong>Modem</strong></p>
+<p>The modem was the big show stopper when we initial began with hacking
+on the Palm Pre. The protocol Palm uses to communicate with the modem
+is nothing already known in the FOSS community. Yes, there is even an
+AT-Port you can use but there are missing some commands we need to make
+calls or register for so called <em>unsolicited responses</em>.  So the only
+way to bring FSO to the Palm Pre was to reverse engineering the protocol.</p>
+<p>Most of the basic reverse engineering is done. We know how the protocol
+works and how we can use it. We wrote an implementation of the protocol
+and it is used in FSO's fsogsmd to interact with the modem (checkout
+msmcommd and libmsmcomm in the <a href="http://git.freesmartphone.org/?p=msmcomm.git;a=summary">msmcomm repository</a>). We can make
+calls and see when a call is comming in.</p>
+<p>Currently we are using both ports (the AT and the binary one) to
+communicate with the modem. So we have all functionality you want have
+to on a basic phone (Call, SMS, &hellip;) but no GPRS/EDGE/HSDPA connection.
+Normally webOS uses the AT port to setup up a PPP connection and as we
+are using it to do some other stuff we cannot create a PPP connection
+anymore. When we are ready with the msmcomm protocol to support most of
+the GSM stuff we can disable the AT port in fsogsmd and use it for
+creating a PPP connection. So you see, this is no real show stopper
+anymore, just a matter of time 🙂</p>
+<p>What have to be done on the modem level? I assume that we currently
+have about 10% disassembled from the msmcomm protocol. There are many
+things missing (SIM API, Network related stuff, &hellip;). To improve this
+I am currently writing a little tool called <a href="http://git.freesmartphone.org/?p=msmcomm.git;a=summary">msmsh</a>.</p>
+<p><strong>Suspend/Resume</strong></p>
+<p>Suspend/Resume works out of the box with the kernel from webOS without
+any modification. You can do a simple <em>echo mem &gt; /sys/power/state</em> and
+the device suspends. To resume there are several wakeup sources defined
+in the kernel (Power Button, Volume Keys, Slider, Headphone …). I
+already wrote a plugin for FSO's fsodeviced to support suspend/resume
+within FSO.</p>
+<p><strong>Touchscreen</strong></p>
+<p>This is our current show stopper. Palm implemented a driver in the Linux
+kernel which only does low level communication with the touchscreen. It
+forwards all data from the touchscreen to the device node <em>/dev/touchscreen</em>.
+Some people are trying to find out how this data is structured to use it
+without requiring any of Palm's tools. But no real progress here.</p>
+<p><strong>rootfs</strong></p>
+<p>Currently we are building an uImage with integrated rootfs and then boot
+it from our local PC on the Pre device to leave everything else on the
+Pre as it is. When we are ready with basic telephony and touchscreen we
+will release this uImage so everyone can test it on their device. It will
+include <a href="http://git.freesmartphone.org/?p=aurora.git;a=tree;f=zhone2;h=d22dc860948db78cad2210c98372009976382bb9;hb=HEAD">zhone2</a> (a rewrite of <a href="http://git.freesmartphone.org/?p=zhone.git;a=summary">zhone</a> in vala) to have a simple UI
+to test FSO's telephony support. Later we want to integrate a bootloader
+into the device so you can easily switch between webOS and a FSO based linux.</p>
+<p>So you may see, many things are already done and we're close to have a full
+featured FSO framework running. If you are interested in running your Pre
+without webOS and with a FOSS-only userland then get in contact with us:
+Use smartphone-userland mailinglist or #openmoko-cdevel/#opemoko-dev on
+irc.freenode.net.</p>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2020 Simon Fels | Made with <a href="https://github.com/mojoaar/hucore.git" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥ | <a href="https://mm.gravedo.de/blog/dsgvo/index.html">Data policy</a> | <a href="https://mm.gravedo.de/blog/impressum/index.html">Imprint</a></p>
+  </div>
+</section>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-133715-1', 'auto');
+  ga('send', 'pageview');
+  ga('set', 'anonymizeIp', true);
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>

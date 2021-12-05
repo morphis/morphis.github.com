@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de-de">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="linux, anbox, software-development" name="keywords">
+<meta content="Simon Fels" name="author">
+<meta property="og:title" content="Anbox - Android in a Box - Personal notes">
+<meta property="og:url" content="https://mm.gravedo.de/blog/posts/2017-04-10-introducing-anbox/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>Anbox - Android in a Box | Personal notes</title>
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/style.css">
+<link rel="shortcut icon" href="https://mm.gravedo.de/blog/wave.ico">
+<link rel="stylesheet" href="https://mm.gravedo.de/blog/css/fontawesome-all.css">
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://mm.gravedo.de/blog"><h1 class="title is-4">Personal notes</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/morphis" target="_blank">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://linkedin.com/in/simon-fels" target="_blank">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Anbox - Android in a Box</h1>
+    <h2 class="subtitle is-5">April 12, 2017 by Simon Fels</h2>
+    
+    <div class="content">
+      <p>Today I am making a private side-project public I am working on for more than 1.5
+years now. Back in 2015 I started working on a prototype of what I
+call <a href="http://anbox.io">Anbox</a> today. It was born out of the idea of
+putting Android into a simple container based on
+<a href="https://linuxcontainers.org/">LXC</a> and bridging relevant parts
+over to the host operating system while not allowing any access to
+real hardware or user data. The Android applications should integrate
+well into the existing desktop environment like they were regular
+applications. There were quite a few problems to solve on the way
+to a really working implementation but it is now in a state that it
+makes sense to share it with a wider audience.</p>
+<p>Anbox uses Linux namespaces (user, network, cgroup, pid, ..) to
+isolate the Android operating system from the host. For Open GL ES
+support Anbox takes code parts from the Android emulator implementation
+to serialize the command stream and send it over to the host where
+it is mapped on existing Open GL or Open GL ES implementations.</p>
+<p>The source code is entirely available as open source. Most parts are
+licenses under the terms of the GPLv3 but a few are Apache-2.0 for
+compatibility reasons with code used from other projects.</p>
+<p>Anbox itself is still in its early phase and is in a pre-alpha state
+where crashes and instability is expected. The next phase of
+development will focus on stability and bug fixing and will add
+more necessary features to integrated better with the host operating
+system.</p>
+<p>If you're interested in <a href="http://anbox.io">Anbox</a> you will find a lot
+more information on its website <a href="http://anbox.io">anbox.io</a>. The source
+code of the project is hosted on <a href="https://github.com/anbox/anbox">Github</a>.</p>
+<p>If you're now curious how Anbox looks like in action, have a look at
+the following video:</p>
+<p><a href="http://www.youtube.com/watch?v=MbmiHnasGWg" title="Anbox"><img src="http://img.youtube.com/vi/MbmiHnasGWg/0.jpg" alt="Anbox"></a></p>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2020 Simon Fels | Made with <a href="https://github.com/mojoaar/hucore.git" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥ | <a href="https://mm.gravedo.de/blog/dsgvo/index.html">Data policy</a> | <a href="https://mm.gravedo.de/blog/impressum/index.html">Imprint</a></p>
+  </div>
+</section>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-133715-1', 'auto');
+  ga('send', 'pageview');
+  ga('set', 'anonymizeIp', true);
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>
